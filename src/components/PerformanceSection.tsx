@@ -2,6 +2,7 @@
 import React from "react";
 import { Card, CardContent, CardFooter } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
+import { Youtube } from "lucide-react";
 
 const performances = [
   {
@@ -10,7 +11,8 @@ const performances = [
     description: "A powerful portrayal of Lord Shiva's cosmic dance that represents the cycles of creation and destruction.",
     image: "https://images.unsplash.com/photo-1523712999610-f77fbcfc3843?auto=format&fit=crop&q=80",
     date: "March 15, 2024",
-    venue: "National Theatre, Delhi"
+    venue: "National Theatre, Delhi",
+    youtubeId: "dQw4w9WgXcQ" // Replace with actual YouTube video ID
   },
   {
     id: 2,
@@ -18,7 +20,8 @@ const performances = [
     description: "Depicting the playful and divine stories of Lord Krishna through expressive Abhinaya and rhythmic footwork.",
     image: "https://images.unsplash.com/photo-1500673922987-e212871fec22?auto=format&fit=crop&q=80",
     date: "January 22, 2024",
-    venue: "Cultural Center, Chennai"
+    venue: "Cultural Center, Chennai",
+    youtubeId: "dQw4w9WgXcQ" // Replace with actual YouTube video ID
   },
   {
     id: 3,
@@ -26,7 +29,8 @@ const performances = [
     description: "An ode to the divine feminine energy through intricate expressions and dynamic movements.",
     image: "https://images.unsplash.com/photo-1618160702438-9b02ab6515c9?auto=format&fit=crop&q=80",
     date: "November 10, 2023",
-    venue: "International Arts Festival, Mumbai"
+    venue: "International Arts Festival, Mumbai",
+    youtubeId: "dQw4w9WgXcQ" // Replace with actual YouTube video ID
   }
 ];
 
@@ -43,7 +47,22 @@ const PerformanceSection: React.FC = () => {
           </p>
         </div>
         
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
+          {/* Featured Video Section */}
+          <div className="lg:col-span-2 mb-8">
+            <h3 className="text-2xl font-bold text-natya-burgundy mb-4">Latest Performance</h3>
+            <div className="aspect-video rounded-lg overflow-hidden shadow-xl">
+              <iframe 
+                className="w-full h-full"
+                src={`https://www.youtube.com/embed/${performances[0].youtubeId}`}
+                title={performances[0].title}
+                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                allowFullScreen
+              ></iframe>
+            </div>
+          </div>
+          
+          {/* Performance Cards */}
           {performances.map((performance) => (
             <Card 
               key={performance.id} 
@@ -69,21 +88,33 @@ const PerformanceSection: React.FC = () => {
               <CardFooter>
                 <Button 
                   variant="outline" 
-                  className="w-full border-natya-red text-natya-red hover:bg-natya-red hover:text-white"
+                  className="w-full border-natya-red text-natya-red hover:bg-natya-red hover:text-white gap-2"
+                  onClick={() => window.open(`https://youtube.com/watch?v=${performance.youtubeId}`, '_blank', 'noopener')}
                 >
-                  Watch Highlights
+                  <Youtube className="w-4 h-4" />
+                  Watch Performance
                 </Button>
               </CardFooter>
             </Card>
           ))}
         </div>
         
-        <div className="text-center mt-12">
+        <div className="text-center mt-12 space-y-4">
           <Button 
             className="bg-natya-burgundy hover:bg-natya-red text-white"
           >
             View All Performances
           </Button>
+          <div>
+            <a 
+              href="https://drive.google.com/file/d/your-cv-file-id" 
+              target="_blank"
+              rel="noopener noreferrer"
+              className="text-natya-burgundy hover:text-natya-red transition-colors inline-flex items-center gap-2"
+            >
+              Download Performance Resume
+            </a>
+          </div>
         </div>
       </div>
     </section>

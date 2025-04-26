@@ -1,8 +1,15 @@
-
 import React from "react";
+import { Facebook, Instagram, Twitter, Youtube } from "lucide-react";
 
 const Footer: React.FC = () => {
   const currentYear = new Date().getFullYear();
+  
+  const socialLinks = [
+    { icon: Instagram, href: "https://instagram.com/natyajanrani", label: "Instagram" },
+    { icon: Youtube, href: "https://youtube.com/@natyajanrani", label: "YouTube" },
+    { icon: Facebook, href: "https://facebook.com/natyajanrani", label: "Facebook" },
+    { icon: Twitter, href: "https://twitter.com/natyajanrani", label: "Twitter" }
+  ];
   
   return (
     <footer className="bg-natya-dark text-white py-12">
@@ -14,14 +21,16 @@ const Footer: React.FC = () => {
               Celebrating the sacred art of Bharatanatyam through performances, workshops, and cultural education. Keeping alive the traditions while embracing contemporary expressions.
             </p>
             <div className="flex space-x-4">
-              {["instagram", "youtube", "facebook", "twitter"].map((social) => (
+              {socialLinks.map(({ icon: Icon, href, label }) => (
                 <a 
-                  key={social}
-                  href="#" 
-                  className="text-gray-400 hover:text-natya-gold transition-colors"
+                  key={label}
+                  href={href}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="text-gray-400 hover:text-natya-gold transition-colors p-2 hover:bg-white/5 rounded-full"
+                  aria-label={label}
                 >
-                  <span className="sr-only">{social}</span>
-                  <div className="w-5 h-5"></div>
+                  <Icon className="w-5 h-5" />
                 </a>
               ))}
             </div>

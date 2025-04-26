@@ -1,12 +1,16 @@
-
 import React from "react";
 import { Button } from "@/components/ui/button";
-import {
-  Card,
-  CardContent,
-} from "@/components/ui/card";
+import { Card, CardContent } from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
+import { Facebook, Instagram, Twitter, Youtube } from "lucide-react";
+
+const socialLinks = [
+  { icon: Instagram, href: "https://instagram.com/natyajanrani", label: "Instagram" },
+  { icon: Youtube, href: "https://youtube.com/@natyajanrani", label: "YouTube" },
+  { icon: Facebook, href: "https://facebook.com/natyajanrani", label: "Facebook" },
+  { icon: Twitter, href: "https://twitter.com/natyajanrani", label: "Twitter" }
+];
 
 const ContactSection: React.FC = () => {
   return (
@@ -106,14 +110,16 @@ const ContactSection: React.FC = () => {
                 <div className="mt-10">
                   <h4 className="font-medium text-white mb-4">Follow Me</h4>
                   <div className="flex space-x-4">
-                    {["instagram", "youtube", "facebook", "twitter"].map((social) => (
+                    {socialLinks.map(({ icon: Icon, href, label }) => (
                       <a 
-                        key={social}
-                        href="#" 
+                        key={label}
+                        href={href}
+                        target="_blank"
+                        rel="noopener noreferrer"
                         className="bg-white/20 hover:bg-white/30 transition-colors p-2 rounded-full"
+                        aria-label={label}
                       >
-                        <span className="sr-only">{social}</span>
-                        <div className="w-6 h-6"></div>
+                        <Icon className="w-6 h-6" />
                       </a>
                     ))}
                   </div>
