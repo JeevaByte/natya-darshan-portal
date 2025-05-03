@@ -2,7 +2,7 @@
 import React from "react";
 import { Card, CardContent, CardFooter } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
-import { Youtube } from "lucide-react";
+import { Youtube, Download } from "lucide-react";
 
 const performances = [
   {
@@ -39,7 +39,7 @@ const PerformanceSection: React.FC = () => {
     <section id="performances" className="section-padding bg-white" aria-labelledby="performances-heading">
       <div className="container mx-auto container-padding">
         <div className="text-center mb-12">
-          <h2 id="performances-heading" className="text-3xl md:text-4xl font-bold mb-4 text-natya-burgundy">
+          <h2 id="performances-heading" className="text-3xl md:text-4xl font-bold mb-4 text-natya-burgundy font-playfair">
             Featured Performances
           </h2>
           <p className="text-lg text-natya-dark max-w-2xl mx-auto">
@@ -50,8 +50,8 @@ const PerformanceSection: React.FC = () => {
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
           {/* Featured Video Section */}
           <div className="lg:col-span-2 mb-8">
-            <h3 className="text-2xl font-bold text-natya-burgundy mb-4">Latest Performance</h3>
-            <div className="aspect-video rounded-lg overflow-hidden shadow-xl">
+            <h3 className="text-2xl font-bold text-natya-burgundy mb-4 font-playfair">Latest Performance</h3>
+            <div className="aspect-video rounded-lg overflow-hidden shadow-xl bg-natya-dark/5 backdrop-blur-sm">
               <iframe 
                 className="w-full h-full"
                 src={`https://www.youtube.com/embed/${performances[0].youtubeId}`}
@@ -59,9 +59,10 @@ const PerformanceSection: React.FC = () => {
                 allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
                 allowFullScreen
                 loading="lazy"
+                aria-label={`Watch ${performances[0].title} performance video`}
               ></iframe>
             </div>
-            <p className="mt-3 text-sm text-gray-600">
+            <p className="mt-3 text-sm text-gray-600 italic">
               {performances[0].title} - {performances[0].venue}, {performances[0].date}
             </p>
           </div>
@@ -70,30 +71,30 @@ const PerformanceSection: React.FC = () => {
           {performances.map((performance) => (
             <Card 
               key={performance.id} 
-              className="overflow-hidden transition-all duration-300 hover:shadow-xl border-natya-gold/20 hover:border-natya-gold"
+              className="overflow-hidden transition-all duration-300 hover:shadow-xl border-natya-gold/20 hover:border-natya-gold group"
             >
               <div className="relative h-60 overflow-hidden">
                 <img 
                   src={performance.image} 
                   alt={`Performance: ${performance.title}`}
-                  className="w-full h-full object-cover transition-transform duration-500 hover:scale-110"
+                  className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
                   loading="lazy"
                 />
                 <div className="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-natya-dark to-transparent p-4">
-                  <h3 className="text-white text-xl font-bold">{performance.title}</h3>
+                  <h3 className="text-white text-xl font-bold font-playfair">{performance.title}</h3>
                 </div>
               </div>
               <CardContent className="pt-6">
                 <p className="text-natya-dark mb-4">{performance.description}</p>
                 <div className="flex justify-between text-sm text-natya-burgundy">
-                  <span>{performance.date}</span>
+                  <span className="font-medium">{performance.date}</span>
                   <span>{performance.venue}</span>
                 </div>
               </CardContent>
-              <CardFooter>
+              <CardFooter className="flex flex-col space-y-3">
                 <Button 
                   variant="outline" 
-                  className="w-full border-natya-red text-natya-red hover:bg-natya-red hover:text-white gap-2"
+                  className="w-full border-natya-red text-natya-red hover:bg-natya-red hover:text-white gap-2 transition-colors"
                   onClick={() => window.open(`https://youtube.com/watch?v=${performance.youtubeId}`, '_blank', 'noopener')}
                   aria-label={`Watch ${performance.title} on YouTube`}
                 >
@@ -107,7 +108,7 @@ const PerformanceSection: React.FC = () => {
         
         <div className="text-center mt-12 space-y-4">
           <Button 
-            className="bg-natya-burgundy hover:bg-natya-red text-white"
+            className="bg-natya-burgundy hover:bg-natya-red text-white transition-colors"
             aria-label="View all performances"
           >
             View All Performances
