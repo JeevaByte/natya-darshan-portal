@@ -36,10 +36,10 @@ const performances = [
 
 const PerformanceSection: React.FC = () => {
   return (
-    <section id="performances" className="section-padding bg-white">
+    <section id="performances" className="section-padding bg-white" aria-labelledby="performances-heading">
       <div className="container mx-auto container-padding">
         <div className="text-center mb-12">
-          <h2 className="text-3xl md:text-4xl font-bold mb-4 text-natya-burgundy">
+          <h2 id="performances-heading" className="text-3xl md:text-4xl font-bold mb-4 text-natya-burgundy">
             Featured Performances
           </h2>
           <p className="text-lg text-natya-dark max-w-2xl mx-auto">
@@ -58,8 +58,12 @@ const PerformanceSection: React.FC = () => {
                 title={performances[0].title}
                 allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
                 allowFullScreen
+                loading="lazy"
               ></iframe>
             </div>
+            <p className="mt-3 text-sm text-gray-600">
+              {performances[0].title} - {performances[0].venue}, {performances[0].date}
+            </p>
           </div>
           
           {/* Performance Cards */}
@@ -71,8 +75,9 @@ const PerformanceSection: React.FC = () => {
               <div className="relative h-60 overflow-hidden">
                 <img 
                   src={performance.image} 
-                  alt={performance.title}
+                  alt={`Performance: ${performance.title}`}
                   className="w-full h-full object-cover transition-transform duration-500 hover:scale-110"
+                  loading="lazy"
                 />
                 <div className="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-natya-dark to-transparent p-4">
                   <h3 className="text-white text-xl font-bold">{performance.title}</h3>
@@ -90,8 +95,9 @@ const PerformanceSection: React.FC = () => {
                   variant="outline" 
                   className="w-full border-natya-red text-natya-red hover:bg-natya-red hover:text-white gap-2"
                   onClick={() => window.open(`https://youtube.com/watch?v=${performance.youtubeId}`, '_blank', 'noopener')}
+                  aria-label={`Watch ${performance.title} on YouTube`}
                 >
-                  <Youtube className="w-4 h-4" />
+                  <Youtube className="w-4 h-4" aria-hidden="true" />
                   Watch Performance
                 </Button>
               </CardFooter>
@@ -102,6 +108,7 @@ const PerformanceSection: React.FC = () => {
         <div className="text-center mt-12 space-y-4">
           <Button 
             className="bg-natya-burgundy hover:bg-natya-red text-white"
+            aria-label="View all performances"
           >
             View All Performances
           </Button>
@@ -111,7 +118,9 @@ const PerformanceSection: React.FC = () => {
               target="_blank"
               rel="noopener noreferrer"
               className="text-natya-burgundy hover:text-natya-red transition-colors inline-flex items-center gap-2"
+              aria-label="Download performance resume"
             >
+              <Download className="w-4 h-4" aria-hidden="true" />
               Download Performance Resume
             </a>
           </div>

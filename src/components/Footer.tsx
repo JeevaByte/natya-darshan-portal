@@ -1,5 +1,7 @@
+
 import React from "react";
-import { Facebook, Instagram, Twitter, Youtube } from "lucide-react";
+import { Facebook, Instagram, Twitter, Youtube, Download, Mail, Phone } from "lucide-react";
+import { Button } from "@/components/ui/button";
 
 const Footer: React.FC = () => {
   const currentYear = new Date().getFullYear();
@@ -12,7 +14,8 @@ const Footer: React.FC = () => {
   ];
   
   return (
-    <footer className="bg-natya-dark text-white py-12">
+    <footer className="bg-natya-dark text-white py-12" aria-labelledby="footer-heading">
+      <h2 id="footer-heading" className="sr-only">Footer</h2>
       <div className="container mx-auto container-padding">
         <div className="grid grid-cols-1 md:grid-cols-4 gap-8">
           <div className="md:col-span-2">
@@ -30,7 +33,7 @@ const Footer: React.FC = () => {
                   className="text-gray-400 hover:text-natya-gold transition-colors p-2 hover:bg-white/5 rounded-full"
                   aria-label={label}
                 >
-                  <Icon className="w-5 h-5" />
+                  <Icon className="w-5 h-5" aria-hidden="true" />
                 </a>
               ))}
             </div>
@@ -38,28 +41,56 @@ const Footer: React.FC = () => {
           
           <div>
             <h4 className="text-natya-gold font-medium mb-4">Quick Links</h4>
-            <ul className="space-y-2">
-              {["Home", "About", "Performances", "Gallery", "Contact"].map((link) => (
-                <li key={link}>
-                  <a 
-                    href={`#${link.toLowerCase()}`} 
-                    className="text-gray-300 hover:text-natya-gold transition-colors"
-                  >
-                    {link}
-                  </a>
-                </li>
-              ))}
-            </ul>
+            <nav aria-label="Footer Navigation">
+              <ul className="space-y-2">
+                {["Home", "About", "Performances", "Gallery", "Contact"].map((link) => (
+                  <li key={link}>
+                    <a 
+                      href={`#${link.toLowerCase()}`} 
+                      className="text-gray-300 hover:text-natya-gold transition-colors"
+                    >
+                      {link}
+                    </a>
+                  </li>
+                ))}
+              </ul>
+            </nav>
           </div>
           
           <div>
             <h4 className="text-natya-gold font-medium mb-4">Contact</h4>
             <address className="not-italic text-gray-300 space-y-2">
-              <p>Chennai, Tamil Nadu</p>
-              <p>India</p>
-              <p className="mt-4">contact@natyajanrani.com</p>
-              <p>+91 98765 43210</p>
+              <div className="flex items-center gap-2">
+                <Mail className="w-4 h-4 text-natya-gold" aria-hidden="true" />
+                <a href="mailto:contact@natyajanrani.com" className="hover:text-natya-gold transition-colors">
+                  contact@natyajanrani.com
+                </a>
+              </div>
+              <div className="flex items-center gap-2">
+                <Phone className="w-4 h-4 text-natya-gold" aria-hidden="true" />
+                <a href="tel:+919876543210" className="hover:text-natya-gold transition-colors">
+                  +91 98765 43210
+                </a>
+              </div>
+              <p className="mt-4">Chennai, Tamil Nadu, India</p>
             </address>
+            <div className="mt-4">
+              <Button 
+                variant="outline" 
+                size="sm"
+                className="flex items-center gap-2 border-natya-gold text-natya-gold hover:bg-natya-gold/10"
+                asChild
+              >
+                <a 
+                  href="https://drive.google.com/file/d/your-resume-file-id" 
+                  target="_blank"
+                  rel="noopener noreferrer"
+                >
+                  <Download className="w-4 h-4" aria-hidden="true" />
+                  Download Resume
+                </a>
+              </Button>
+            </div>
           </div>
         </div>
         
@@ -67,10 +98,12 @@ const Footer: React.FC = () => {
           <p className="text-gray-400">
             &copy; {currentYear} Natya Darshan. All rights reserved.
           </p>
-          <div className="mt-4 md:mt-0 space-x-6 text-sm text-gray-400">
-            <a href="#" className="hover:text-natya-gold transition-colors">Privacy Policy</a>
-            <a href="#" className="hover:text-natya-gold transition-colors">Terms of Service</a>
-          </div>
+          <nav aria-label="Legal">
+            <div className="mt-4 md:mt-0 space-x-6 text-sm text-gray-400">
+              <a href="#privacy" className="hover:text-natya-gold transition-colors">Privacy Policy</a>
+              <a href="#terms" className="hover:text-natya-gold transition-colors">Terms of Service</a>
+            </div>
+          </nav>
         </div>
       </div>
     </footer>
